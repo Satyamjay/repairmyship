@@ -14,7 +14,7 @@ def signup(request):
     if form.is_valid():
         User.objects.create_user(email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
         login(request)
-    return render(request, 'signup.html', context={'form': form})
+    return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
 
 
 def login(request):

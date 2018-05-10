@@ -6,13 +6,16 @@ from .models import *
 
 class RegisterForm(forms.ModelForm):
     # password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
         fields = ('email', 'password', 'age', 'country')
         widgets = {
-            'password': forms.PasswordInput,
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'age': forms.NumberInput(attrs={'class': 'form-control', 'min': 20, 'max': 120}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     def save(self, commit=True):
@@ -82,5 +85,5 @@ class UserAdminChangeForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))

@@ -12,13 +12,13 @@
                 </div>
                 <div class="col-sm-1"></div>
             </div>
-                <form method="post">
+                <form method="post" id="form_id">
                    {% csrf_token %}
                    <div class="form-group">
                         {{ form }}
                    </div>
-                   <button class="btn btn-default" type="submit">Submit</button>
                  </form>
+            <button class="btn btn-primary btn-block" form="form_id" type="submit">Submit</button>
         </div>
         <div class="col-sm-3"></div>
     </div>
