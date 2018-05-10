@@ -26,12 +26,19 @@ def login(request):
         if user is not None:
             user.last_login = datetime.datetime.now()
             request.session['username'] = user.email
-            return HttpResponse(request.session['username'])
+            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Logout'})
         if user is None:
-            return HttpResponse("Invalid UserName or Password")
-    return render(request, 'signup.html', context={'form': form})
+            return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
+    else:
+        return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
+    return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
 
 
 def logout(request):
     auth.logout(request)
+    form = LoginForm(None)
+    return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+
+
+def home(request):
     return redirect('/login/')

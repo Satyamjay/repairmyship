@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93b3ce43-e053-47c2-ae41-c0d3ba28e5df" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/authentication/templates/base/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/authentication/static/css/mycss.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/admin.py" afterPath="$PROJECT_DIR$/authentication/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BuildMyShip/custom_authentication.py" afterPath="$PROJECT_DIR$/BuildMyShip/custom_authentication.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/base/base.html" afterPath="$PROJECT_DIR$/authentication/templates/base/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/forms.py" afterPath="$PROJECT_DIR$/authentication/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/models.py" afterPath="$PROJECT_DIR$/authentication/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BuildMyShip/settings.py" afterPath="$PROJECT_DIR$/BuildMyShip/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/signup.html" afterPath="$PROJECT_DIR$/authentication/templates/signup.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BuildMyShip/urls.py" afterPath="$PROJECT_DIR$/BuildMyShip/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/views.py" afterPath="$PROJECT_DIR$/authentication/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BuildMyShip.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +37,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
-              <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="1496">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,8 +67,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="714">
-              <caret line="31" column="65" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+            <state vertical-scroll-proportion="-9.206897" vertical-offset="277" max-vertical-offset="833">
+              <caret line="32" column="87" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -83,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication/templates/base/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7234042" vertical-offset="0" max-vertical-offset="799">
-              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            <state vertical-scroll-proportion="-11.692307" vertical-offset="189" max-vertical-offset="765">
+              <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -113,12 +106,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signup.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="signup.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/authentication/templates/signup.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="221">
-              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-              <folding />
+            <state vertical-scroll-proportion="0.4678899" vertical-offset="0" max-vertical-offset="578">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +121,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="2006">
+            <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="2006">
               <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -135,12 +130,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/authentication/tests.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BuildMyShip/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="544">
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+              <folding>
+                <element signature="e#635#667#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,17 +153,17 @@
         <option value="$PROJECT_DIR$/authentication/templates/password_hashing.py" />
         <option value="$PROJECT_DIR$/authentication/password_hashing.py" />
         <option value="$PROJECT_DIR$/authentication/admin.py" />
-        <option value="$PROJECT_DIR$/authentication/forms.py" />
         <option value="$PROJECT_DIR$/BuildMyShip/custom_authentication.py" />
         <option value="$PROJECT_DIR$/authentication/models.py" />
-        <option value="$PROJECT_DIR$/BuildMyShip/urls.py" />
-        <option value="$PROJECT_DIR$/authentication/views.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/authentication/templates/signup.html" />
         <option value="$PROJECT_DIR$/static/css/mycss.css" />
         <option value="$PROJECT_DIR$/BuildMyShip/settings.py" />
         <option value="$PROJECT_DIR$/authentication/static/css/mycss.css" />
+        <option value="$PROJECT_DIR$/BuildMyShip/urls.py" />
+        <option value="$PROJECT_DIR$/authentication/forms.py" />
         <option value="$PROJECT_DIR$/authentication/templates/base/base.html" />
+        <option value="$PROJECT_DIR$/authentication/views.py" />
+        <option value="$PROJECT_DIR$/authentication/templates/signup.html" />
       </list>
     </option>
   </component>
@@ -942,6 +939,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="12094" max-vertical-offset="18037">
           <caret line="313" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="1071" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -979,56 +977,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BuildMyShip/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="527">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-          <folding>
-            <element signature="e#635#667#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="714">
-          <caret line="31" column="65" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/authentication/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="462">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2006">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1496">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
-          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1049,14 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/templates/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="221">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/authentication/static/css/mycss.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
@@ -1065,11 +1009,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BuildMyShip/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="544">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="e#635#667#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="2006">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="1496">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/authentication/templates/base/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7234042" vertical-offset="0" max-vertical-offset="799">
-          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+        <state vertical-scroll-proportion="-11.692307" vertical-offset="189" max-vertical-offset="765">
+          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.206897" vertical-offset="277" max-vertical-offset="833">
+          <caret line="32" column="87" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/templates/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4678899" vertical-offset="0" max-vertical-offset="578">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
