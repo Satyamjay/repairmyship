@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93b3ce43-e053-47c2-ae41-c0d3ba28e5df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore.txt" afterPath="$PROJECT_DIR$/.gitignore.txt" />
-    </list>
+    <list default="true" id="93b3ce43-e053-47c2-ae41-c0d3ba28e5df" name="Default" comment="" />
     <ignored path="BuildMyShip.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
