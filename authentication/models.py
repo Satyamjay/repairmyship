@@ -1,52 +1,81 @@
 from django.db import models
-import bcrypt
 
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 
-
+# UserManager class extended from BaseUserManager
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, age=None, country=None, salt=None, is_active=True, is_admin=False):
+    def create_user(self, email, password=None, is_staff=False, age=None, country=None, is_active=True, is_admin=False):
         if not email:
             raise ValueError("Users must have an email address")
         if not email:
             raise ValueError("Users must have a password")
 
-        user_obj = User(email=email, age=age, country=country)
-
+        """user_obj = User(email=email, age=age, country=country)
+        user_obj.staff = is_staff
+        user_obj.admin = is_admin
+        user_obj.active = is_active
         salt = bcrypt.gensalt()
         user_obj.salt = salt.decode('ascii')
         hashed_password = bcrypt.hashpw(password.encode('utf8'), salt)
-        user_obj.password = hashed_password.decode('ascii')
-        user_obj.admin = is_admin
-        user_obj.active = is_active
-        user_obj.save(using=self._db)
-        return user_obj
+        user_obj.password = hashed_password.decode('ascii')"""
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+        user.set_password(password)
+        user.age = age
+        user.country = country
+        user.admin = is_admin
+        user.staff = is_staff
+        user.active = is_active
+        user.save(using=self._db)
+        return user
 
-    def create_superuser(self, email, password):
+    def create_staffuser(self, email, password, age=None, country=None, is_admin=False, is_staff=True, is_active=True):
         """
-        Creates and saves a superuser with the given email and password.
+        Creates and saves a staff user with the given email and password.
         """
         user = self.create_user(
             email,
             password=password,
+            age=age,
+            country=country,
+            is_staff=is_staff,
+            is_admin=is_admin,
         )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password, age, country):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.model(
+            email=self.normalize_email(email),
+        )
+        user.set_password(password)
+        user.age = age
+        user.country = country
         user.admin = True
+        user.staff = True
         user.save(using=self._db)
         return user
 
 
+# My Custom User Model extended from Abstract Base User
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=False)
+    staff = models.NullBooleanField(default=False, null=True) # a admin user; non super-user
     age = models.IntegerField(default=0)
     country = models.CharField(max_length=50)
-    salt = models.CharField(max_length=30, blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [email, age, country]
+    REQUIRED_FIELDS = ['age', 'country']
+    # This is used to link it to its manager class
     objects = UserManager()
 
     def get_full_name(self):
@@ -79,3 +108,6 @@ class User(AbstractBaseUser):
     def is_active(self):
         """Is the user active?"""
         return self.active
+
+    def is_staff(self):
+        return self.staff

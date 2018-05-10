@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTHENTICATION_BACKENDS = (
-    'BuildMyShip.custom_authentication.MyCustomBackend',
+    #'BuildMyShip.custom_authentication.MyCustomBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 
 AUTH_USER_MODEL = 'authentication.User'
 

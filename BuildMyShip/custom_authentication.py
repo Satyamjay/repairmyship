@@ -1,8 +1,9 @@
 # import the User object
 from authentication.models import *
+import bcrypt
+
 # Name my backend 'MyCustomBackend'
 class MyCustomBackend:
-
     # Create an authentication method
     # This is called by the standard Django login procedure
     def authenticate(self, username=None, password=None):
@@ -11,7 +12,7 @@ class MyCustomBackend:
             user = User.objects.get(email=username)
 
             #  Check the password is the reverse of the username
-            if user.password == password:
+            if user.check_password(password):
                 # Yes? return the Django user object
                 return user
             else:

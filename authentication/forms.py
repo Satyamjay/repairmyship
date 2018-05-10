@@ -10,9 +10,8 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'age', 'country', 'salt')
+        fields = ('email', 'password', 'age', 'country')
         widgets = {
-            'salt': forms.HiddenInput,
             'password': forms.PasswordInput,
         }
 
