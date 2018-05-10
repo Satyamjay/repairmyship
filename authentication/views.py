@@ -26,7 +26,7 @@ def login(request):
         if user is not None:
             user.last_login = datetime.datetime.now()
             request.session['username'] = user.email
-            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Logout'})
+            return render(request, 'home.html')
         if user is None:
             return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
     else:
