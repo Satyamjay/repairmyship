@@ -23,12 +23,21 @@
             <div>
                <h2 id="question_text"><a href="#"> {{ question.text }}</a> </h2>
             </div>
-            <div>
+    <!-- Changes -->
+            <div id="answer_text">
                 <style>
                     a:hover {text-decoration: none;}
                 </style>
                 {% for answer in answers %}
-                    <h3 id="answer_text">{{ answer.text }}</h3>
+                    <div> Ans 1<h3 id="answers">{{ answer.text }}</h3>
+                    <h6>Answered by :</h6>
+                     <a href="/home" class="icon-block">
+                <i class="material-icons" style="font-size:22px;margin-left: 88%;color: darkgreen">thumb_up_alt</i></a>
+                <a href="/home" class="icon-block">
+                <i class="material-icons" style="font-size:22px;">thumb_down_alt</i></a>
+                    </div>
+
+                    <!-- Changes End -->
                 {% endfor %}
             </div>
 	</div>

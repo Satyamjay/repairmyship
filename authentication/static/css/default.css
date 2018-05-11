@@ -74,7 +74,21 @@ a:hover{
     padding: 2%;
 
 }
+#answer_text{
+ margin-bottom: 9%;
+    padding: 2%;
+    font-family: 'Roboto Condensed', sans-serif;
+font:130%/110% Georgia serif;
+}
 
+#answer_text h3{
+    color: #003366;
+    font:bold 130%/110% Times new Roman;
+}
+
+#answer_text div{
+    margin-bottom: 4%;
+}
 #btnask {
 	display:inline-block;
 	border-radius: 10px;
