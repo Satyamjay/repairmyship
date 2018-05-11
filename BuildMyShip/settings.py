@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'BuildMyShip.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'buildmyship',
+            'NAME': 'repairmyship',
             'USER': 'postgres',
             'PASSWORD': 'p7sn3%$W?-',
             'PORT': '5432',

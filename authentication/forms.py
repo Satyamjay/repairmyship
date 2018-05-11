@@ -10,8 +10,9 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'age', 'country')
+        fields = ('username','email', 'password', 'age', 'country')
         widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'age': forms.NumberInput(attrs={'class': 'form-control', 'min': 20, 'max': 120}),

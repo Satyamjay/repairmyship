@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from authentication import views
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
+    path('home/', views.home),
+    url('^home/(?:page-(?P<page_number>\d+)/)?$', views.home),
     path('signup/', views.signup),
     path('login/', views.login),
     path('logout/', views.logout)

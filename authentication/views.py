@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import *
-from django.http import HttpResponse
+from django.http import Http404
 from django.contrib.auth import authenticate
 from authentication.models import *
 import datetime
@@ -18,15 +18,13 @@ def signup(request):
 
 
 def login(request):
-    if request.user.is_authenticated:
-        return HttpResponse(request.session['username'])
     form = LoginForm(request.POST or None)
     if form.is_valid():
         user = authenticate(username=request.POST['email'], password=request.POST['password'])
         if user is not None:
             user.last_login = datetime.datetime.now()
-            request.session['username'] = user.email
-            return render(request, 'home.html')
+            request.session['username'] = user.username
+            return redirect(home)
         if user is None:
             return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
     else:
@@ -37,8 +35,18 @@ def login(request):
 def logout(request):
     auth.logout(request)
     form = LoginForm(None)
-    return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+    return redirect(login)
 
 
-def home(request):
-    return redirect('/login/')
+def home(request, page_number=1):
+    if 'username' in request.session.keys():
+        try:
+            page_number = int(page_number)
+        except ValueError:
+            raise Http404()
+        max_questions_in_one_page = 2
+        mystring = ''
+        questions = Question.objects.all()[(page_number-1):(page_number+max_questions_in_one_page-1)]
+        return render(request, 'home.html', context={'questions': questions})
+    else:
+        return redirect(login)

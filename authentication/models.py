@@ -6,7 +6,7 @@ from django.contrib.auth.models import (
 
 # UserManager class extended from BaseUserManager
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, is_staff=False, age=None, country=None, is_active=True, is_admin=False):
+    def create_user(self, email,username=None, password=None, is_staff=False, age=None, country=None, is_active=True, is_admin=False):
         if not email:
             raise ValueError("Users must have an email address")
         if not email:
@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
         )
+        user.username = username
         user.set_password(password)
         user.age = age
         user.country = country
@@ -48,7 +49,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, age, country):
+    def create_superuser(self, email,username, password, age, country):
         """
         Creates and saves a superuser with the given email and password.
         """
@@ -58,6 +59,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.age = age
         user.country = country
+        user.username = username
         user.admin = True
         user.staff = True
         user.save(using=self._db)
@@ -66,15 +68,17 @@ class UserManager(BaseUserManager):
 
 # My Custom User Model extended from Abstract Base User
 class User(AbstractBaseUser):
+    username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=False)
     staff = models.NullBooleanField(default=False, null=True) # a admin user; non super-user
     age = models.IntegerField(default=0)
     country = models.CharField(max_length=50)
+    reputaion = models.IntegerField(default=0)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['age', 'country']
+    REQUIRED_FIELDS = ['age', 'country','username']
     # This is used to link it to its manager class
     objects = UserManager()
 
@@ -111,3 +115,36 @@ class User(AbstractBaseUser):
 
     def is_staff(self):
         return self.staff
+
+
+class Question(models.Model):
+    TYPE_OF_QUESTIONS_CHOICES = (
+        ('parent_child', 'Parent-Child'),
+        ('husband_wife', 'Husband-Wife'),
+        ('gf_bf', 'GF-BF'),
+        ('friends', 'Friends'),
+        ('siblings', 'Siblings'),
+        ('other', 'Other')
+    )
+    type = models.CharField(
+        max_length=20,
+        choices=TYPE_OF_QUESTIONS_CHOICES,
+        default='other',
+    )
+    when = models.DateTimeField(auto_now_add=True)
+    flagged_interesting = models.IntegerField(default=0)
+    asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=1000)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.text
+
+
+class Answer(models.Model):
+    its_question = models.ForeignKey(Question,on_delete=models.CASCADE)
+    when = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+    reports = models.IntegerField(default=0)
+    answered_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=1000)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.text
