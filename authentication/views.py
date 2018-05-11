@@ -36,7 +36,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     form = LoginForm(None)
-    return redirect(login)
+    return redirect(login, permanent=True)
 
 
 def home(request, page_number=1):
@@ -46,10 +46,10 @@ def home(request, page_number=1):
         except ValueError:
             raise Http404()
         max_questions_in_one_page = 2
-        if page_number < 1:
-            return redirect(home)
         questions = Question.objects.all()[(page_number-1):(page_number+max_questions_in_one_page-1)]
         max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page)
+        if (page_number < 1) or (page_number > max_pages):
+            raise Http404
         return render(
             request, 'home.html',
             context={
@@ -61,8 +61,20 @@ def home(request, page_number=1):
         return redirect(login)
 
 
-def answer(request, question_id):
-    question = Question.objects.get(id=question_id)
-    answers = Answer.objects.get(its_question=question_id)
-    return render(request,'answer.html',{'question':question})
-
+def answers(request, question_id, page_number=1):
+    if 'username' in request.session.keys():
+        question = Question.objects.get(id=question_id)
+        answers = Answer.objects.filter(its_question=question_id)
+        max_answers_in_one_page = 2
+        max_pages = math.ceil((len(Answer.objects.all()))/max_answers_in_one_page)
+        if (page_number < 1) or (page_number > max_pages):
+            raise Http404
+        return render(request, 'answer.html',
+                      context= {
+                        'question':question,
+                        'answers':answers,
+                        'login_or_logout': 'Logout',
+                        'current_page': range(page_number, page_number+4),
+                        'max_pages': max_pages})
+    else:
+        return redirect(login)
