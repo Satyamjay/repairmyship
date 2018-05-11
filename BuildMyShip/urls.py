@@ -25,5 +25,6 @@ urlpatterns = [
     url('^home/(?:page-(?P<page_number>\d+)/)?$', views.home),
     path('signup/', views.signup),
     path('login/', views.login),
-    path('logout/', views.logout)
+    path('logout/', views.logout),
+    path('answer/', views.answer),
 ]

@@ -59,3 +59,8 @@ def home(request, page_number=1):
                     'max_pages': max_pages})
     else:
         return redirect(login)
+
+
+def answer(request):
+    return render(request,'answer.html',{})
+
