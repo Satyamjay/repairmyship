@@ -61,7 +61,9 @@ img.right {
 
 #content {
 	/*float: center;*/
-	padding: 7% 20% 10% 25%;
+}
+a:hover{
+    text-decoration: underline;
 }
 
 #content div{
@@ -80,7 +82,6 @@ img.right {
     color: white;
 	/*padding:%;*/
 	width:50%;
-	margin-top:4%;
 	height:40px;
 }
 
@@ -94,4 +95,5 @@ img.right {
 
 .sort {
     text-align: right;
+    margin-bottom: 1%;
 }

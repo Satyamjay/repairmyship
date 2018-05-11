@@ -16,17 +16,16 @@
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
+              <li><a href="#">Most Popular</a></li>
+              <li><a href="#">Latest</a></li>
             </ul>
           </div>
           <div class="dropdown" id="btnFilter">
              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter
              <span class="caret"></span></button>
              <ul class="dropdown-menu">
-               <li><a href="#"></a>Parent-Child</li>
-               <li><a href="#">CSS</a>Husband-Wife</li>
+               <li><a href="#">Parent-Child</a></li>
+               <li><a href="#">Husband-Wife</a></li>
                <li><a href="#">GF-BF</a></li>
                <li><a href="#">Friends</a></li>
                <li><a href="#">Siblings</a></li>
@@ -39,10 +38,12 @@
 	<div id="content">
         {% for question in questions %}
             <div>
-               <h2> {{ question.text }} </h2>
+               <h2 id="question_text"><a href="#"> {{ question.text }}</a> </h2>
                 <h6>Posted On: {{ question.when }}</h6>
-                <i class="material-icons" style="font-size:22px;margin-left: 88%;">thumb_up_alt</i>
-                <i class="material-icons" style="font-size:22px;">report</i>
+                <a href="/home" class="icon-block">
+                <i class="material-icons" style="font-size:22px;margin-left: 88%;color: darkgreen">thumb_up_alt</i></a>
+                <a href="/home" class="icon-block">
+                <i class="material-icons" style="font-size:22px;">thumb_down_alt</i></a>
             </div>
         {% endfor %}
 
