@@ -26,7 +26,7 @@ def login(request):
             request.session['username'] = user.username
             return redirect(home)
         if user is None:
-            return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
+            return render(request, 'signup.html', {'form': form, 'valid_login': 'Invalid UserName or Password', 'login_or_logout': 'Login'})
     else:
         return render(request, 'signup.html', {'form': form, 'login_or_logout': 'Login'})
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
@@ -47,6 +47,6 @@ def home(request, page_number=1):
         max_questions_in_one_page = 2
         mystring = ''
         questions = Question.objects.all()[(page_number-1):(page_number+max_questions_in_one_page-1)]
-        return render(request, 'home.html', context={'questions': questions})
+        return render(request, 'home.html', context={'questions': questions, 'login_or_logout': 'Logout'})
     else:
         return redirect(login)
