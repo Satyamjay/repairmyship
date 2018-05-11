@@ -46,7 +46,9 @@ def home(request, page_number=1):
             raise Http404()
         max_questions_in_one_page = 2
         mystring = ''
+        if page_number < 1:
+            return redirect(home)
         questions = Question.objects.all()[(page_number-1):(page_number+max_questions_in_one_page-1)]
-        return render(request, 'home.html', context={'questions': questions, 'login_or_logout': 'Logout'})
+        return render(request, 'home.html', context={'questions': questions, 'login_or_logout': 'Logout', 'current_page': page_number})
     else:
         return redirect(login)
