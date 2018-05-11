@@ -6,6 +6,7 @@ from authentication.models import *
 import datetime
 from django.contrib import auth
 from django.shortcuts import redirect
+import math
 # Create your views here.
 
 
@@ -45,10 +46,16 @@ def home(request, page_number=1):
         except ValueError:
             raise Http404()
         max_questions_in_one_page = 2
-        mystring = ''
         if page_number < 1:
             return redirect(home)
         questions = Question.objects.all()[(page_number-1):(page_number+max_questions_in_one_page-1)]
-        return render(request, 'home.html', context={'questions': questions, 'login_or_logout': 'Logout', 'current_page': page_number})
+        max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page)
+        return render(
+            request, 'home.html',
+            context={
+                    'questions': questions,
+                    'login_or_logout': 'Logout',
+                    'current_page': range(page_number, page_number+4),
+                    'max_pages': max_pages})
     else:
         return redirect(login)
