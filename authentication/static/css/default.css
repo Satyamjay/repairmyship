@@ -64,6 +64,15 @@ img.right {
 	padding: 7% 20% 10% 25%;
 }
 
+#content div{
+    background: bisque;
+    margin-bottom: 9%;
+    font: bold 130%/110% Georgia serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 2%;
+
+}
+
 #btnask {
 	display:inline-block;
 	border-radius: 10px;

@@ -135,7 +135,8 @@ class Question(models.Model):
     flagged_interesting = models.IntegerField(default=0)
     asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=1000)
-    def __str__(self):              # __unicode__ on Python 2
+    like_by = models.ManyToManyField(User, related_name="user")
+    def __str__(self):
         return self.text
 
 

@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
     <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
 	<!-- start page -->
 <div id="page">
     <div class="content-heading">
@@ -37,7 +39,10 @@
 	<div id="content">
         {% for question in questions %}
             <div>
-                {{ question.text }}
+               <h2> {{ question.text }} </h2>
+                <h6>Posted On: {{ question.when }}</h6>
+                <i class="material-icons" style="font-size:22px;margin-left: 88%;">thumb_up_alt</i>
+                <i class="material-icons" style="font-size:22px;">report</i>
             </div>
         {% endfor %}
 
@@ -66,11 +71,7 @@
                 <li class="page-item"><a class="page-link" href="/home/page-{{ i|add:"1" }}">{{ i|add:"1" }}</a></li>
                 {% endif %}
             {% endfor %}
-           <!--<li class="page-item active"><a class="page-link" href="/home/page-{{ current_page }}">{{ current_page }}</a></li>
-            <li class="page-item"><a class="page-link" href="/home/page-{{ current_page|add:"1" }}">{{ current_page|add:"1" }}</a></li>
-            <li class="page-item"><a class="page-link" href="/home/page-{{ current_page|add:"2" }}">{{ current_page|add:"2" }}</a></li>
-            <li class="page-item"><a class="page-link" href="/home/page-{{ current_page|add:"3" }}">{{ current_page|add:"3" }}</a></li>
-            <li class="page-item"><a class="page-link" href="/home/page-{{ current_page|add:"4" }}">{{ current_page|add:"4" }}</a></li>-->
+
 
             <!--Arrow right-->
             <li class="page-item">
