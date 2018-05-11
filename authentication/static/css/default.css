@@ -1,10 +1,4 @@
 
-/*
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-*/
-
 h1, h2, h3 {
 	margin-top: 0;
 	color: #8C0209;
@@ -395,4 +389,10 @@ img.right {
 
 .nav{
 	text-align: center;
+}
+
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
 }
