@@ -61,6 +61,8 @@ def home(request, page_number=1):
         return redirect(login)
 
 
-def answer(request):
-    return render(request,'answer.html',{})
+def answer(request, question_id):
+    question = Question.objects.get(id=question_id)
+    answers = Answer.objects.get(its_question=question_id)
+    return render(request,'answer.html',{'question':question})
 

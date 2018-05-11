@@ -38,7 +38,7 @@
 	<div id="content">
         {% for question in questions %}
             <div>
-               <h2 id="question_text"><a href="#"> {{ question.text }}</a> </h2>
+               <h2 id="question_text"><a href="/answer/{{ question.id }}"> {{ question.text }}</a> </h2>
                 <h6>Posted On: {{ question.when }}</h6>
                 <a href="/home" class="icon-block">
                 <i class="material-icons" style="font-size:22px;margin-left: 88%;color: darkgreen">thumb_up_alt</i></a>
