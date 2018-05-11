@@ -1,24 +1,22 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<div id="wrapper">
     <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css" media="screen" />
 	<!-- start page -->
-	<div id="page">
-        <div class="content-heading">
-            <button type="button" id="btnask">Ask a QUESTION!!</button>
-        </div>
-		<!-- start content -->
-		<div id="content">
-            {% for question in questions %}
-                <div>
-                    {{ question.text }}
-                </div>
-            {% endfor %}
+<div id="page">
+    <div class="content-heading">
+        <button type="button" id="btnask">Ask a QUESTION!!</button>
+    </div>
+    <!-- start content -->
+	<div id="content">
+        {% for question in questions %}
+            <div>
+                {{ question.text }}
+            </div>
+        {% endfor %}
 
-	    </div>
+	 </div>
         <!-- end content -->
-	</div>
-	<!-- end page -->
 </div>
+	<!-- end page -->
 {% endblock %}
