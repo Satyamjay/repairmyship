@@ -27,5 +27,7 @@ urlpatterns = [
     path('login/', views.my_login),
     path('logout/', views.my_logout),
     path('answer/<int:question_id>/<int:page_number>/', views.answers),
-    path('like_question/<int:question_id>/', views.like_question)
+    path('api/like_question/<int:question_id>/', views.LikeQuestion.as_view()),
+    path('api/report_question/<int:question_id>/', views.ReportAnswer.as_view())
+
 ]

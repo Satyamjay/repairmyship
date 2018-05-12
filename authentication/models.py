@@ -132,10 +132,12 @@ class Question(models.Model):
         default='other',
     )
     when = models.DateTimeField(auto_now_add=True)
-    flagged_interesting = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+    reports = models.IntegerField(default=0)
     asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=1000)
-    like_by = models.ManyToManyField(User, related_name="user")
+    like_by = models.ManyToManyField(User, related_name="user_liked_question")
+    reported_by = models.ManyToManyField(User, related_name="user_report_question")
     def __str__(self):
         return self.text
 
@@ -147,5 +149,7 @@ class Answer(models.Model):
     reports = models.IntegerField(default=0)
     answered_by = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=1000)
-    def __str__(self):              # __unicode__ on Python 2
+    like_by = models.ManyToManyField(User, related_name="user_liked_answer")
+    reported_by = models.ManyToManyField(User, related_name="user_report_answer")
+    def __str__(self):
         return self.text
