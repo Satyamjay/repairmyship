@@ -24,7 +24,8 @@ urlpatterns = [
     path('home/', views.home),
     url('^home/(?:page-(?P<page_number>\d+)/)?$', views.home),
     path('signup/', views.signup),
-    path('login/', views.login),
-    path('logout/', views.logout),
+    path('login/', views.my_login),
+    path('logout/', views.my_logout),
     path('answer/<int:question_id>/<int:page_number>/', views.answers),
+    path('like_question/<int:question_id>/', views.like_question)
 ]
