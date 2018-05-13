@@ -108,6 +108,13 @@
         e.preventDefault();
         var this_ = $(this);
         var likeUrl = this_.attr("data-url");
+        console.log(this_.css("color"));
+        if(this_.css("color") === 'rgb(65, 118, 144)'){
+            this_.css("color", "white");
+        }
+        else{
+            this_.css("color", "#417690");
+        }
         $.ajax({
             url: likeUrl,
             method: "GET",
@@ -118,10 +125,18 @@
         e.preventDefault();
         var this_ = $(this);
         var likeUrl = this_.attr("data-url");
+        console.log(this_.css("color"));
+        if(this_.css("color") === 'rgb(255, 0, 0)'){
+            this_.css("color", "white");
+        }
+        else{
+            this_.css("color", "red");
+        }
         $.ajax({
             url: likeUrl,
             method: "GET",
             data: {}
+
         })
     })
 </script>

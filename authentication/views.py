@@ -114,7 +114,10 @@ class LikeQuestion(APIView):
         user = self.request.user
         if user.is_authenticated:
             question = Question.objects.get(id = question_id)
-            question.like_by.add(user)
+            if user in question.like_by.all():
+                question.like_by.remove(user)
+            else:
+                question.like_by.add(user)
             data = {
                 'success': True
             }
@@ -129,7 +132,10 @@ class ReportQuestion(APIView):
         user = self.request.user
         if user.is_authenticated:
             question = Question.objects.get(id = question_id)
-            question.reported_by.add(user)
+            if user in question.reported_by.all():
+                question.reported_by.remove(user)
+            else:
+                question.reported_by.add(user)
             data = {
                 'success': True
             }
