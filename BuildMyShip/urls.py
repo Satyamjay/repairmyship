@@ -16,18 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from authentication import views
-from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
-    path('home/', views.home),
-    url('^home/(?:page-(?P<page_number>\d+)/)?$', views.home),
+    #path('', views.home),
+    #path('home/', views.home),
+    #path('^home/<string:sort_by>/(?:page-(?P<page_number>\d+)/)?$', views.home),
+    path('home/<sort_by>/<filter_by>/<int:page_number>/', views.home),
     path('signup/', views.signup),
     path('login/', views.my_login),
     path('logout/', views.my_logout),
     path('answer/<int:question_id>/<int:page_number>/', views.answers),
     path('api/like_question/<int:question_id>/', views.LikeQuestion.as_view()),
-    path('api/report_question/<int:question_id>/', views.ReportAnswer.as_view())
+    path('api/report_question/<int:question_id>/', views.ReportQuestion.as_view())
 
 ]

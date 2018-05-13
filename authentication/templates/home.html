@@ -18,20 +18,21 @@
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="#">Most Popular</a></li>
-              <li><a href="#">Latest</a></li>
+              <li><a href="/home/likes/{{ filter_by }}/1">Most Popular</a></li>
+              <li><a href="/home/-when/{{ filter_by }}/1">Latest</a></li>
             </ul>
           </div>
           <div class="dropdown" id="btnFilter">
              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter
              <span class="caret"></span></button>
              <ul class="dropdown-menu">
-               <li><a href="#">Parent-Child</a></li>
-               <li><a href="#">Husband-Wife</a></li>
-               <li><a href="#">GF-BF</a></li>
-               <li><a href="#">Friends</a></li>
-               <li><a href="#">Siblings</a></li>
-               <li><a href="#">Other</a></li>
+               <li><a href="/home/{{ sort_by }}/all/1">Remove Filter</a></li>
+               <li><a href="/home/{{ sort_by }}/parent_child/1">Parent-Child</a></li>
+               <li><a href="/home/{{ sort_by }}/husband_wife/1">Husband-Wife</a></li>
+               <li><a href="/home/{{ sort_by }}/gf_b/1">GF-BF</a></li>
+               <li><a href="/home/{{ sort_by }}/friends/1">Friends</a></li>
+               <li><a href="/home/{{ sort_by }}/siblings/1">Siblings</a></li>
+               <li><a href="/home/{{ sort_by }}/other/1">Other</a></li>
              </ul>
           </div>
     </div>
@@ -63,12 +64,12 @@
         <ul class="pagination pagination-circle pg-blue mb-0">
 
             <!--First-->
-            <li class="page-item"><a class="page-link" href="/home/page-1">First</a></li>
+            <li class="page-item"><a class="page-link" href="/home/{{ sort_by }}/{{ filter_by }}/1">First</a></li>
 
         {% if current_page.0 > 1 %}
             <!--Arrow left-->
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" href="/home/page-{{ current_page.0|add:"-1" }}">
+                <a class="page-link" aria-label="Previous" href="/home/{{ sort_by }}/{{ filter_by }}/{{ current_page.0|add:"-1" }}">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -76,10 +77,10 @@
         {% endif %}
 
             <!--Numbers-->
-            <li class="page-item active"><a class="page-link" href="/home/page-{{ current_page.0 }}">{{ current_page.0 }}</a></li>
+            <li class="page-item active"><a class="page-link" href="/home/{{ sort_by }}/{{ filter_by }}/{{ current_page.0 }}">{{ current_page.0 }}</a></li>
             {% for i in current_page %}
                 {% if i < max_pages %}
-                <li class="page-item"><a class="page-link" href="/home/page-{{ i|add:"1" }}">{{ i|add:"1" }}</a></li>
+                <li class="page-item"><a class="page-link" href="/home/{{ sort_by }}/{{ filter_by }}/{{ i|add:"1" }}">{{ i|add:"1" }}</a></li>
                 {% endif %}
             {% endfor %}
 
@@ -87,7 +88,7 @@
             <!--Arrow right-->
         {% if current_page.0 < max_pages %}
             <li class="page-item">
-                <a class="page-link" aria-label="Next" href="/home/page-{{ current_page.0|add:"1" }}">
+                <a class="page-link" aria-label="Next" href="/home/{{ sort_by }}/{{ filter_by }}/{{ current_page.0|add:"1" }}">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -95,7 +96,7 @@
         {% endif %}
 
             <!--Last-->
-            <li class="page-item"><a class="page-link" href="/home/page-{{ max_pages }}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="/home/{{ sort_by }}/{{ filter_by }}/{{ max_pages }}">Last</a></li>
 
         </ul>
     </nav>
