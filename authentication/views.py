@@ -46,7 +46,7 @@ def my_logout(request):
     return redirect(my_login)
 
 
-def home(request, page_number=1, sort_by= 'when', filter_by='all'):
+def home(request, page_number=1, sort_by='-when', filter_by='all'):
     if request.user.is_authenticated:
         try:
             page_number = int(page_number)
@@ -54,19 +54,19 @@ def home(request, page_number=1, sort_by= 'when', filter_by='all'):
             raise Http404()
         max_questions_in_one_page = 2
         first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
-        question = QuerySet()
-        if(filter_by=='all'):
+        # questions = QuerySet()
+        if filter_by == 'all':
             questions = Question.objects.order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
         else:
             questions = Question.objects.filter(type=filter_by).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
         liked_question = []
         for question in questions:
-            if question.like_by.filter(id = request.user.id):
+            if question.like_by.filter(id=request.user.id):
                 liked_question.append(question.id)
 
         reported_question = []
         for question in questions:
-            if question.reported_by.filter(id = request.user.id):
+            if question.reported_by.filter(id=request.user.id):
                 reported_question.append(question.id)
 
         max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
