@@ -147,7 +147,7 @@ def answer_question(request, its_question):
         question = Question.objects.get(id=its_question)
         if form.is_valid():
             Answer.objects.create(its_question=question, answered_by=request.user, text=request.POST['text'], )
-            return redirect('/home/-when/all/1')
+            return redirect('/answer/-when/'+str(question.id)+'/1')
         else:
             return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
     else:
