@@ -135,7 +135,7 @@ def ask_question(request):
             Question.objects.create(asked_by=request.user, text=request.POST['text'], type=request.POST['type'])
             return redirect('/home/-when/all/1')
         else:
-            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+            return render(request, 'question.html', context={'form': form, 'login_or_logout': 'Logout'})
     else:
         return redirect(my_login)
 
@@ -149,7 +149,7 @@ def answer_question(request, its_question):
             Answer.objects.create(its_question=question, answered_by=request.user, text=request.POST['text'], )
             return redirect('/answer/-when/'+str(question.id)+'/1')
         else:
-            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+            return render(request, 'answer_question.html', context={'form': form, 'login_or_logout': 'Logout', 'question': question})
     else:
         return redirect(my_login)
 
