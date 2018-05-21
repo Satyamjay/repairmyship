@@ -25,12 +25,17 @@ urlpatterns = [
     path('logout/', views.my_logout),
     # Question URL
     path('home/<sort_by>/<filter_by>/<int:page_number>/', views.home),
+    # Ask a question
+    path('ask_question/', views.ask_question),
+    # Answer a question
+    path('answer_question/<int:its_question>', views.answer_question),
     # Answer URL
     path('answer/<sort_by>/<int:question_id>/<int:page_number>/', views.answers),
     # API URLS
     path('api/like_question/<int:question_id>/', views.LikeQuestion.as_view()),
     path('api/report_question/<int:question_id>/', views.ReportQuestion.as_view()),
     path('api/like_answer/<int:answer_id>/', views.LikeAnswer.as_view()),
-    path('api/report_answer/<int:answer_id>/', views.ReportAnswer.as_view())
+    path('api/report_answer/<int:answer_id>/', views.ReportAnswer.as_view()),
+
 
 ]

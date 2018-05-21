@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from authentication.forms import AskQuestionForm, AnswerQuestionForm
 from .forms import RegisterForm, LoginForm
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
@@ -122,6 +123,33 @@ def answers(request, question_id, sort_by= '-when', page_number=1):
                 'sort_by': sort_by,
                 'user': request.user.username})
 
+    else:
+        return redirect(my_login)
+
+
+def ask_question(request):
+    if request.user.is_authenticated:
+        # Create an object of AskQuestionForm with either the data from POST or empty
+        form = AskQuestionForm(request.POST or None)
+        if form.is_valid():
+            Question.objects.create(asked_by=request.user, text=request.POST['text'], type=request.POST['type'])
+            return redirect('/home/-when/all/1')
+        else:
+            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+    else:
+        return redirect(my_login)
+
+
+def answer_question(request, its_question):
+    if request.user.is_authenticated:
+        # Create an object of AskQuestionForm with either the data from POST or empty
+        form = AnswerQuestionForm(request.POST or None)
+        question = Question.objects.get(id=its_question)
+        if form.is_valid():
+            Answer.objects.create(its_question=question, answered_by=request.user, text=request.POST['text'], )
+            return redirect('/home/-when/all/1')
+        else:
+            return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
     else:
         return redirect(my_login)
 
