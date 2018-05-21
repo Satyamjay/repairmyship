@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .forms import RegisterForm, LoginForm
 from django.http import Http404, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate,login, logout
+# from BuildMyShip.custom_authentication import MyCustomBackend
 from authentication.models import User, Question, Answer
 import datetime
 from django.shortcuts import redirect

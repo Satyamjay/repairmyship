@@ -30,7 +30,7 @@ LOGIN_URL = 'login/'
 ALLOWED_HOSTS = []
 
 AUTHENTICATION_BACKENDS = (
-    #'BuildMyShip.custom_authentication.MyCustomBackend',
+    # 'BuildMyShip.custom_authentication.MyCustomBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 

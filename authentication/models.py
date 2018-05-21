@@ -75,7 +75,7 @@ class User(AbstractBaseUser):
     staff = models.NullBooleanField(default=False, null=True) # a admin user; non super-user
     age = models.IntegerField(default=0)
     country = models.CharField(max_length=50)
-    reputaion = models.IntegerField(default=0)
+    is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['age', 'country','username']
