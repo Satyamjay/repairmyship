@@ -40,9 +40,9 @@ class RegisterForm(forms.ModelForm):
         return password2
 
 
-class UserAdminCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
+"""class UserAdminCreationForm(forms.ModelForm):
+    # A form for creating new users. Includes all the required
+    # fields, plus a repeated password.
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
@@ -68,10 +68,10 @@ class UserAdminCreationForm(forms.ModelForm):
 
 
 class UserAdminChangeForm(forms.ModelForm):
-    """A form for updating users. Includes all the fields on
-    the user, but replaces the password field with admin's
-    password hash display field.
-    """
+    # A form for updating users. Includes all the fields on
+    # the user, but replaces the password field with admin's
+    # password hash display field.
+
     password = ReadOnlyPasswordHashField()
 
     class Meta:
@@ -82,9 +82,11 @@ class UserAdminChangeForm(forms.ModelForm):
         # Regardless of what the user provides, return the initial value.
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
-        return self.initial["password"]
+        return self.initial["password"]"""
 
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+

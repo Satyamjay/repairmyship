@@ -7,13 +7,17 @@
 	<!-- start page -->
 <div id="page">
 
+    <div class="content-heading">
+        <button type="button" id="btnask">Answer this QUESTION!!</button>
+    </div>
+
     <div class="sort">
           <div class="dropdown" id="btnSort">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="#">Most Popular</a></li>
-              <li><a href="#">Latest</a></li>
+              <li><a href="/answer/-likes/{{ question.id }}/1">Most Popular</a></li>
+              <li><a href="/answer/-when/{{ question.id }}/1">Latest</a></li>
             </ul>
           </div>
     </div>
@@ -21,23 +25,24 @@
     <!-- start content -->
 	<div id="content">
             <div>
-               <h2 id="question_text"><a href="#"> {{ question.text }}</a> </h2>
+               <h2 id="question_text">{{ question.text }} </h2>
             </div>
-    <!-- Changes -->
             <div id="answer_text">
                 <style>
                     a:hover {text-decoration: none;}
                 </style>
                 {% for answer in answers %}
-                    <div> Ans 1<h3 id="answers">{{ answer.text }}</h3>
-                    <h6>Answered by :</h6>
-                     <a href="/home" class="icon-block">
-                <i class="material-icons" style="font-size:22px;margin-left: 88%;color: darkgreen">thumb_up_alt</i></a>
-                <a href="/home" class="icon-block">
-                <i class="material-icons" style="font-size:22px;">thumb_down_alt</i></a>
+                    <div><h3 id="answers">{{ answer.text }}</h3>
+                        <h6>Posted On: {{ answer.when }}</h6>
+                        <h6>Answered by : {{ question.asked_by }}</h6>
+                        <style>
+                            .icon-block{color:white;}
+                        </style>
+                        <a href="#" class="like icon-block" data-url="/api/like_answer/{{ answer.id }}" {% if answer.id in liked_answer %}style="color: #417690" {% endif %}>
+                        <i class="material-icons" style="font-size:22px;margin-left: 88%;">thumb_up_alt</i></a>
+                        <a href="#" class="report icon-block" data-url="/api/report_answer/{{ answer.id }}" {% if answer.id in reported_answer %}style="color: #417690" {% endif %}>
+                        <i class="material-icons" style="font-size:22px;">report</i></a>
                     </div>
-
-                    <!-- Changes End -->
                 {% endfor %}
             </div>
 	</div>
@@ -48,11 +53,11 @@
         <ul class="pagination pagination-circle pg-blue mb-0">
 
             <!--First-->
-            <li class="page-item"><a class="page-link" href="/answer/{{ question.id }}/1">First</a></li>
-        {% if current_page.0 > 1 %}
+            <li class="page-item"><a class="page-link" href="/answer/{{ sort_by }}/{{ question.id }}/1">First</a></li>
+        {% if current_pages.0 > 1 %}
             <!--Arrow left-->
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" href="/answer/{{ question.id }}/{{ current_page.0|add:"-1" }}">
+                <a class="page-link" aria-label="Previous" href="/answer/{{ sort_by }}/{{ question.id }}/{{ current_pages.0|add:"-1" }}">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -60,18 +65,18 @@
         {% endif %}
 
             <!--Numbers-->
-            <li class="page-item active"><a class="page-link" href="/answer/{{ question.id }}/{{ current_page.0 }}">{{ current_page.0 }}</a></li>
-            {% for i in current_page %}
+            <li class="page-item active"><a class="page-link" href="/answer/{{ sort_by }}/{{ question.id }}/{{ current_pages.0 }}">{{ current_pages.0 }}</a></li>
+            {% for i in current_pages %}
                 {% if i < max_pages %}
-                <li class="page-item"><a class="page-link" href="/answer/{{ question.id }}/{{ i|add:"1" }}">{{ i|add:"1" }}</a></li>
+                <li class="page-item"><a class="page-link" href="/answer/{{ sort_by }}/{{ question.id }}/{{ i|add:"1" }}">{{ i|add:"1" }}</a></li>
                 {% endif %}
             {% endfor %}
 
 
             <!--Arrow right-->
-        {% if current_page.0 < max_pages %}
+        {% if current_pages.0 < max_pages %}
             <li class="page-item">
-                <a class="page-link" aria-label="Next" href="/answer/{{ question.id }}/{{ current_page.0|add:"1" }}">
+                <a class="page-link" aria-label="Next" href="/answer/{{ sort_by }}/{{ question.id }}/{{ current_pages.0|add:"1" }}">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -79,11 +84,53 @@
         {% endif %}
 
             <!--Last-->
-            <li class="page-item"><a class="page-link" href="/answer/{{ question.id }}/{{ max_pages }}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="/answer/{{ sort_by }}/{{ question.id }}/{{ max_pages }}">Last</a></li>
 
         </ul>
     </nav>
 
 </div>
 	<!-- end page -->
+
+<script>
+    $(".like").click(function(e){
+        e.preventDefault();
+        var this_ = $(this);
+        var likeUrl = this_.attr("data-url");
+        console.log(this_.css("color"));
+        if(this_.css("color") === 'rgb(65, 118, 144)'){
+            this_.css("color", "white");
+        }
+        else{
+            this_.css("color", "#417690");
+        }
+        $.ajax({
+            url: likeUrl,
+            method: "GET",
+            data: {}
+        })
+    });
+    $(".report").click(function(e){
+        e.preventDefault();
+        var this_ = $(this);
+        var likeUrl = this_.attr("data-url");
+        console.log(this_.css("color"));
+        if(this_.css("color") === 'rgb(255, 0, 0)'){
+            this_.css("color", "white");
+        }
+        else{
+            this_.css("color", "red");
+        }
+        $.ajax({
+            url: likeUrl,
+            method: "GET",
+            data: {}
+
+        })
+    })
+</script>
+
+
+
+
 {% endblock %}
