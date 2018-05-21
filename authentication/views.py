@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import RegisterForm, LoginForm
 from django.http import Http404, HttpResponseRedirect
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate, login, logout
 # from BuildMyShip.custom_authentication import MyCustomBackend
 from authentication.models import User, Question, Answer
 import datetime
@@ -14,7 +14,7 @@ def signup(request):
     logout(request)
     form = RegisterForm(request.POST or None)
     if form.is_valid():
-        User.objects.create_user(email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
+        User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
         redirect(my_login)
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
 
