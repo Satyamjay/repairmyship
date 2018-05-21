@@ -61,13 +61,13 @@ def home(request, page_number=1, sort_by= '-when', filter_by='all'):
         liked_question = []
         # Get the questions those are liked by the user on the current page
         for question in questions:
-            if question.like_by.filter(id = request.user.id):
+            if question.like_by.filter(id=request.user.id):
                 liked_question.append(question.id)
 
         reported_question = []
         # Get the questions those are reported by the user on the current page
         for question in questions:
-            if question.reported_by.filter(id = request.user.id):
+            if question.reported_by.filter(id=request.user.id):
                 reported_question.append(question.id)
 
         max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
