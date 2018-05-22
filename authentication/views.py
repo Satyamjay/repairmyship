@@ -16,7 +16,7 @@ def signup(request):
     form = RegisterForm(request.POST or None)
     if form.is_valid():
         User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
-        redirect(my_login)
+        return redirect(my_login)
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
 
 
