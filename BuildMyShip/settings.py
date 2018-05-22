@@ -91,8 +91,7 @@ DATABASES = {
             'USER': 'postgres',
             'PASSWORD': 'p7sn3%$W?-',
             'PORT': '5432',"""
-		'default': dj_database_url.config(
-        default=config('DATABASE_URL'))
+		'default': dj_database_url.config(conn_max_age=500)
 }
 
 
