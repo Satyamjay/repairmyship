@@ -46,7 +46,6 @@
                 <style>
                     .icon-block{color:white;}
                 </style>
-
                 <a class="like icon-block" href="#" data-url="/api/like_question/{{ question.id }}/" {% if question.id in liked_questions %}style="color: #417690" {% endif %}>
                 <i class="material-icons"  style="font-size:22px;margin-left: 93%;">thumb_up_alt</i></a>
                 <a class="report icon-block" href="#" data-url="/api/report_question/{{ question.id }}/" {% if question.id in reported_questions %}style="color:red"{% endif %} }}>

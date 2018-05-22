@@ -53,8 +53,8 @@ def home(request, page_number=1, sort_by= '-when', filter_by='all'):
     if request.user.is_authenticated:
         max_questions_in_one_page = 2
         first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
-        if(filter_by=='all'):
-            # Dont apply filter if filter_by is all
+        if filter_by=='all':
+            # Don't apply filter if filter_by is all
             questions = Question.objects.order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
         else:
             # Apply the filter
@@ -89,27 +89,28 @@ def home(request, page_number=1, sort_by= '-when', filter_by='all'):
     else:
         return redirect(my_login)
 
+
 # Almost same as home view
 def answers(request, question_id, sort_by= '-when', page_number=1):
     if request.user.is_authenticated:
         question = Question.objects.get(id=question_id)
         max_answers_in_one_page = 2
         first_answer_on_the_page = (page_number*max_answers_in_one_page)-max_answers_in_one_page
-        max_pages = math.ceil((len(Answer.objects.all()))/max_answers_in_one_page)
+        max_pages = math.ceil((len(Answer.objects.filter(its_question=question)))/max_answers_in_one_page)
         answers = Answer.objects.filter(its_question=question_id).order_by(sort_by)[first_answer_on_the_page:first_answer_on_the_page+max_answers_in_one_page]
         if (page_number < 1) or (page_number > max_pages) and (max_pages!=0):
             raise Http404
 
         liked_answer = []
         for answer in answers:
-            if answer.like_by.filter(id = request.user.id):
-                liked_answer.append(question.id)
+            if answer.like_by.filter(id=request.user.id):
+                liked_answer.append(answer.id)
 
         reported_answer = []
         for answer in answers:
-            if answer.reported_by.filter(id = request.user.id):
-                reported_answer.append(question.id)
-
+            if answer.reported_by.filter(id=request.user.id):
+                reported_answer.append(answer.id)
+        print(max_pages)
         return render(
             request, 'answer.html',
             context={

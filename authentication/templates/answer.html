@@ -38,8 +38,9 @@
                         <style>
                             .icon-block{color:white;}
                         </style>
+
                         <a href="#" class="like icon-block" data-url="/api/like_answer/{{ answer.id }}" {% if answer.id in liked_answer %}style="color: #417690" {% endif %}>
-                        <i class="material-icons" style="font-size:22px;margin-left: 88%;">thumb_up_alt</i></a>
+                        <i class="material-icons" style="font-size:22px;margin-left: 88%;">thumb_up_alt</i><span class="no_of_likes">{{ answer.likes }}</span></a>
                         <a href="#" class="report icon-block" data-url="/api/report_answer/{{ answer.id }}" {% if answer.id in reported_answer %}style="color: #417690" {% endif %}>
                         <i class="material-icons" style="font-size:22px;">report</i></a>
                     </div>
@@ -92,6 +93,7 @@
 </div>
 	<!-- end page -->
 
+
 <script>
     $(".like").click(function(e){
         e.preventDefault();
@@ -100,9 +102,11 @@
         console.log(this_.css("color"));
         if(this_.css("color") === 'rgb(65, 118, 144)'){
             this_.css("color", "white");
+            this_.find('span').html(parseInt(this_.find("span").html())-1);
         }
         else{
             this_.css("color", "#417690");
+            this_.find('span').html(parseInt(this_.find("span").html())+1);
         }
         $.ajax({
             url: likeUrl,
@@ -129,8 +133,6 @@
         })
     })
 </script>
-
-
 
 
 {% endblock %}
