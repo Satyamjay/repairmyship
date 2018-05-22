@@ -26,11 +26,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'sg&ashia7_-!61f%8s(i3o@j6z#_zh8tdm5xo$3*ibc_7!3oey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 LOGIN_URL = 'login/'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['repairmyship.herokuapp.com','127.0.0.1']
 
 AUTHENTICATION_BACKENDS = (
     # 'BuildMyShip.custom_authentication.MyCustomBackend',
