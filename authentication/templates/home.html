@@ -3,7 +3,6 @@
 {% block content %}
     <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css" media="screen" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
 
 
 	<!-- start page -->
@@ -47,7 +46,7 @@
                     .icon-block{color:white;}
                 </style>
                 <a class="like icon-block" href="#" data-url="/api/like_question/{{ question.id }}/" {% if question.id in liked_questions %}style="color: #417690" {% endif %}>
-                <i class="material-icons"  style="font-size:22px;margin-left: 93%;">thumb_up_alt</i></a>
+                <i class="material-icons"  style="font-size:22px;margin-left: 93%;">thumb_up_alt</i><span class="no_of_likes">{{ question.likes }}</span></a>
                 <a class="report icon-block" href="#" data-url="/api/report_question/{{ question.id }}/" {% if question.id in reported_questions %}style="color:red"{% endif %} }}>
                 <i class="material-icons" style="font-size:22px;">report</i></a>
             </div>
@@ -109,9 +108,11 @@
         console.log(this_.css("color"));
         if(this_.css("color") === 'rgb(65, 118, 144)'){
             this_.css("color", "white");
+            this_.find('span').html(parseInt(this_.find("span").html())-1);
         }
         else{
             this_.css("color", "#417690");
+            this_.find('span').html(parseInt(this_.find("span").html())+1);
         }
         $.ajax({
             url: likeUrl,

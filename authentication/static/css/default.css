@@ -50,10 +50,10 @@ img.right {
 /* Page */
 
 #page {
-	width: 960px;
+	width: 95%;
 	margin: 0 auto;
-	padding: 0px;
-	background: #FFFFFF repeat-y left top;
+	padding: 1%;
+	background: #cdb996 repeat-y left top;
 }
 
 
@@ -75,10 +75,10 @@ a:hover{
 
 }
 #answer_text{
- margin-bottom: 9%;
+    margin-bottom: 9%;
     padding: 2%;
     font-family: 'Roboto Condensed', sans-serif;
-font:130%/110% Georgia serif;
+    font:130%/110% Georgia serif;
 }
 
 #answer_text h3{
