@@ -36,6 +36,9 @@ urlpatterns = [
     path('api/report_question/<int:question_id>/', views.ReportQuestion.as_view()),
     path('api/like_answer/<int:answer_id>/', views.LikeAnswer.as_view()),
     path('api/report_answer/<int:answer_id>/', views.ReportAnswer.as_view()),
-
+    # List My Questions
+    path('my_questions/', views.my_questions),
+    # Delete my question
+    path('delete_question/<int:question_id>', views.delete_question)
 
 ]

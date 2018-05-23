@@ -60,7 +60,7 @@ def home(request, page_number=1, sort_by= '-when', filter_by='all'):
             # Apply the filter
             questions = Question.objects.filter(type=filter_by).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
         liked_question = []
-        # Get the questions those are liked by the user on the current page
+        # Get the questions those are liked by the user on the current m
         for question in questions:
             if question.like_by.filter(id=request.user.id):
                 liked_question.append(question.id)
@@ -139,6 +139,85 @@ def ask_question(request):
             return render(request, 'question.html', context={'form': form, 'login_or_logout': 'Logout'})
     else:
         return redirect(my_login)
+
+
+def my_questions(request, page_number=1, sort_by= '-when', filter_by='all'):
+    """if request.user.is_authenticated:
+        max_questions_in_one_page = 2
+        first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
+        if filter_by=='all':
+            # Don't apply filter if filter_by is all
+            questions = Question.objects.order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        else:
+            my_question = []
+        # List of questions of the user logged in
+        for question in questions:
+            if question.asked_by.filter(id=request.user.id):
+                my_question.append(question.id)
+
+
+        max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
+
+        if (page_number < 1) or (page_number > max_pages) and (max_pages!=0):
+            raise Http404
+        return render(
+            request, 'home.html',
+            context={
+                'questions': questions,  # List of questions to be displayed on the current page
+                'login_or_logout': 'Logout',
+                'current_pages': range(page_number, page_number+4),
+                'max_pages': max_pages,
+                'my_questions': my_question,
+                'sort_by': sort_by,
+                'filter_by': filter_by})
+    else:
+        return redirect(my_login)"""
+    if request.user.is_authenticated:
+        max_questions_in_one_page = len(Question.objects.filter(asked_by__id=request.user.id))
+        first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
+        if filter_by=='all':
+            # Don't apply filter if filter_by is all
+            questions = Question.objects.filter(asked_by__id=request.user.id).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        else:
+            # Apply the filter
+            questions = Question.objects.filter(asked_by__id=request.user.id).filter(type=filter_by).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        liked_question = []
+        # Get the questions those are liked by the user on the current m
+        for question in questions:
+            if question.like_by.filter(id=request.user.id):
+                liked_question.append(question.id)
+
+        reported_question = []
+        # Get the questions those are reported by the user on the current page
+        for question in questions:
+            if question.reported_by.filter(id=request.user.id):
+                reported_question.append(question.id)
+
+        max_pages = math.ceil(len(questions)/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
+
+        if (page_number < 1) or (page_number > max_pages) and (max_pages!=0):
+            raise Http404
+        return render(
+            request, 'home.html',
+            context={
+                'questions': questions,  # List of questions to be displayed on the current page
+                'login_or_logout': 'Logout',
+                'current_pages': range(page_number, page_number+4),
+                'max_pages': max_pages,
+                'liked_questions': liked_question,
+                'reported_questions': reported_question,
+                'sort_by': sort_by,
+                'filter_by': filter_by,
+                'is_my_question': True})
+    else:
+        return redirect(my_login)
+
+
+def delete_question(request, question_id=0):
+    question = Question.objects.get(id=question_id)
+    if question.asked_by_id == request.user.id:
+        question.delete()
+    return redirect(my_questions)
 
 
 def answer_question(request, its_question):
