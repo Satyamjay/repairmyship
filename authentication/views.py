@@ -14,6 +14,7 @@ from django.shortcuts import redirect
 import math
 from django.utils.encoding import force_bytes, force_text
 from django.core.mail import EmailMessage
+
 # Create your views here.
 
 
@@ -35,7 +36,6 @@ def signup(request):
         email.send()
         return redirect(my_login)
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
-
 
 
 def my_login(request):
@@ -190,7 +190,7 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
-		
+
 # Like And Report APIs
 from rest_framework.views import APIView
 from rest_framework.response import Response

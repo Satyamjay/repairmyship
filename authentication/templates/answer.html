@@ -34,7 +34,7 @@
                 {% for answer in answers %}
                     <div><h3 id="answers">{{ answer.text }}</h3>
                         <h6>Posted On: {{ answer.when }}</h6>
-                        <h6>Answered by : {{ answer.answered_by }}</h6>
+                        <h6>Answered by : {{ question.asked_by }}</h6>
                         <style>
                             .icon-block{color:white;}
                         </style>
