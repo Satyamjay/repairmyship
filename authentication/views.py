@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from authentication.forms import AskQuestionForm, AnswerQuestionForm
 from .forms import RegisterForm, LoginForm
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 # from BuildMyShip.custom_authentication import MyCustomBackend
+from django.contrib.sites.shortcuts import get_current_site
 from authentication.models import User, Question, Answer
+from .token_generator import account_activation_token
 import datetime
 from django.shortcuts import redirect
 import math
+from django.utils.encoding import force_bytes, force_text
+from django.core.mail import EmailMessage
 # Create your views here.
 
 
@@ -15,9 +21,21 @@ def signup(request):
     logout(request)
     form = RegisterForm(request.POST or None)
     if form.is_valid():
-        User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
+        user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
+        current_site = get_current_site(request)
+        mail_subject = 'Activate your account.'
+        message = render_to_string('acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                'token': account_activation_token.make_token(user),
+            })
+        to_email = form.cleaned_data.get('email')
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
         return redirect(my_login)
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
+
 
 
 def my_login(request):
@@ -28,10 +46,13 @@ def my_login(request):
             # Authenticate is a build in method to check the credentials
             user = authenticate(username=request.POST['email'], password=request.POST['password'])
             if user is not None:
-                user.last_login = datetime.datetime.now()
-                # login is a builtin method to manage sessions
-                login(request, user=user)
-                return redirect('/home/-when/all/1')
+                if user.is_verified:
+                    user.last_login = datetime.datetime.now()
+                    # login is a builtin method to manage sessions
+                    login(request, user=user)
+                    return redirect('/home/-when/all/1')
+                else:
+                    return render(request, 'signup.html', {'form': form, 'valid_login': 'Verify your email', 'login_or_logout': 'Login'})
             if user is None:
                 return render(request, 'signup.html', {'form': form, 'valid_login': 'Invalid UserName or Password', 'login_or_logout': 'Login'})
         else:
@@ -155,6 +176,21 @@ def answer_question(request, its_question):
         return redirect(my_login)
 
 
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_verified = True
+        user.save()
+        # return redirect('home')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
+
+		
 # Like And Report APIs
 from rest_framework.views import APIView
 from rest_framework.response import Response
