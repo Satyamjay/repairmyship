@@ -37,6 +37,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'repairmyship@gmail.com'
+EMAIL_HOST_PASSWORD = 'terabithia@3'
+EMAIL_PORT = 587
+
 # Application definition
 
 INSTALLED_APPS = [
