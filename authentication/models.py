@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
@@ -123,7 +124,7 @@ class Question(models.Model):
         choices=TYPE_OF_QUESTIONS_CHOICES,
         default='other',
     )
-    when = models.DateTimeField(auto_now_add=True)
+    when = models.DateTimeField(default=datetime.now)
     likes = models.IntegerField(default=0)
     reports = models.IntegerField(default=0)
     asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
