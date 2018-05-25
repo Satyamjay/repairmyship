@@ -281,12 +281,12 @@ class ReportQuestion(APIView):
             question = Question.objects.get(id = question_id)
             if user in question.reported_by.all():
                 question.reported_by.remove(user)
-                question.reported_by -= 1
+                question.reports	 -= 1
                 question.save()
                 data['success'] = True
             else:
                 question.reported_by.add(user)
-                question.reported_by += 1
+                question.reports += 1
                 question.save()
                 data['success'] = True
 
