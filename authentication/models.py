@@ -12,14 +12,6 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have a password")
 
-        """user_obj = User(email=email, age=age, country=country)
-        user_obj.staff = is_staff
-        user_obj.admin = is_admin
-        user_obj.active = is_active
-        salt = bcrypt.gensalt()
-        user_obj.salt = salt.decode('ascii')
-        hashed_password = bcrypt.hashpw(password.encode('utf8'), salt)
-        user_obj.password = hashed_password.decode('ascii')"""
         user = self.model(
             email=self.normalize_email(email),
         )

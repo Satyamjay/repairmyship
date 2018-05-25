@@ -13,9 +13,6 @@
 
 
     <div class="sort">
-        <td >
-            <button class="my_questions" onclick="window.location.href='/my_questions/'">My Questions</button>
-            </td>
           <div class="dropdown" id="btnSort">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
             <span class="caret"></span></button>
@@ -34,7 +31,7 @@
                <li><a href="/home/{{ sort_by }}/gf_b/1">GF-BF</a></li>
                <li><a href="/home/{{ sort_by }}/friends/1">Friends</a></li>
                <li><a href="/home/{{ sort_by }}/siblings/1">Siblings</a></li>
-               <li><a href="/home/{{ sort_by }}/other/1">Other</a></li>q
+               <li><a href="/home/{{ sort_by }}/other/1">Other</a></li>
              </ul>
           </div>
     </div>
@@ -49,22 +46,19 @@
                     .icon-block{color:white;}
                 </style>
                 <a class="like icon-block" href="#" data-url="/api/like_question/{{ question.id }}/" {% if question.id in liked_questions %}style="color: #417690" {% endif %}>
-                <i class="material-icons"  style="font-size:22px; margin-left: 87%;">thumb_up_alt</i><span class="no_of_likes">{{ question.likes }}</span></a>
+                <i class="material-icons"  style="font-size:22px;margin-left: 93%;">thumb_up_alt</i><span class="no_of_likes">{{ question.likes }}</span></a>
                 <a class="report icon-block" href="#" data-url="/api/report_question/{{ question.id }}/" {% if question.id in reported_questions %}style="color:red"{% endif %} }}>
                 <i class="material-icons" style="font-size:22px;">report</i></a>
-                {% if is_my_question %}
-                <a class="delete icon-block" href="/delete_question/{{ question.id }}" style="color: #417690">
-                <i class="material-icons"  style="font-size:22px;">delete</i></a> {% endif %}
             </div>
         {% endfor %}
 
 	</div>
     <!-- end content -->
 
-{% if not is_my_question %}
     <!--Pagination -->
     <nav aria-label="pagination example" style="text-align: center;">
         <ul class="pagination pagination-circle pg-blue mb-0">
+
             <!--First-->
             <li class="page-item"><a class="page-link" href="/home/{{ sort_by }}/{{ filter_by }}/1">First</a></li>
 
@@ -102,7 +96,6 @@
 
         </ul>
     </nav>
-{% endif %}
 
 </div>
     <!-- end page -->
@@ -144,16 +137,7 @@
             data: {}
 
         })
-    });
-    $(".delete").click(function(e){
-        e.preventDefault();
-        if (confirm("Delete this Question??")){
-            window.location.href= $(this).attr("href");
-        }
-        else{
-
-        }
-        });
+    })
 </script>
 
 {% endblock %}

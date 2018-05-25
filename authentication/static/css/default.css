@@ -111,14 +111,3 @@ a:hover{
     text-align: right;
     margin-bottom: 1%;
 }
-
-.my_questions
-{
-    display: inline-block;
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    width: 15%;
-    height: 37px;
-    margin-right: 64%;
-}
