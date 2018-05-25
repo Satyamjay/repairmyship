@@ -18,7 +18,7 @@ from django.urls import path, re_path
 from authentication import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('', views.my_login),
     path('signup/', views.signup),
     path('login/', views.my_login),
