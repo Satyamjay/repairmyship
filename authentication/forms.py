@@ -39,8 +39,6 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
 
-    # def send_mail(self):
-
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -74,6 +72,9 @@ class AnswerQuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['text'].label = "Answer"
+
+
+
 
 
 

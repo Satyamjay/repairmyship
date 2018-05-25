@@ -1,20 +1,13 @@
 from django.shortcuts import render
 from authentication.forms import AskQuestionForm, AnswerQuestionForm
 from .forms import RegisterForm, LoginForm
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 # from BuildMyShip.custom_authentication import MyCustomBackend
-from django.contrib.sites.shortcuts import get_current_site
 from authentication.models import User, Question, Answer
-from .token_generator import account_activation_token
 import datetime
 from django.shortcuts import redirect
 import math
-from django.utils.encoding import force_bytes, force_text
-from django.core.mail import EmailMessage
-
 # Create your views here.
 
 
@@ -22,19 +15,8 @@ def signup(request):
     logout(request)
     form = RegisterForm(request.POST or None)
     if form.is_valid():
-        user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
-        current_site = get_current_site(request)
-        mail_subject = 'Activate your account.'
-        message = render_to_string('acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
-                'token': account_activation_token.make_token(user),
-            })
-        to_email = form.cleaned_data.get('email')
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        email.send()
-        return redirect(my_login)
+        User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'], age=request.POST['age'], country=request.POST['country'])
+        redirect(my_login)
     return render(request, 'signup.html', context={'form': form, 'login_or_logout': 'Login'})
 
 
@@ -46,13 +28,10 @@ def my_login(request):
             # Authenticate is a build in method to check the credentials
             user = authenticate(username=request.POST['email'], password=request.POST['password'])
             if user is not None:
-                if user.is_verified:
-                    user.last_login = datetime.datetime.now()
-                    # login is a builtin method to manage sessions
-                    login(request, user=user)
-                    return redirect('/home/-when/all/1')
-                else:
-                    return render(request, 'signup.html', {'form': form, 'valid_login': 'Verify your email', 'login_or_logout': 'Login'})
+                user.last_login = datetime.datetime.now()
+                # login is a builtin method to manage sessions
+                login(request, user=user)
+                return redirect('/home/-when/all/1')
             if user is None:
                 return render(request, 'signup.html', {'form': form, 'valid_login': 'Invalid UserName or Password', 'login_or_logout': 'Login'})
         else:
@@ -81,7 +60,7 @@ def home(request, page_number=1, sort_by= '-when', filter_by='all'):
             # Apply the filter
             questions = Question.objects.filter(type=filter_by).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
         liked_question = []
-        # Get the questions those are liked by the user on the current page
+        # Get the questions those are liked by the user on the current m
         for question in questions:
             if question.like_by.filter(id=request.user.id):
                 liked_question.append(question.id)
@@ -162,6 +141,85 @@ def ask_question(request):
         return redirect(my_login)
 
 
+def my_questions(request, page_number=1, sort_by= '-when', filter_by='all'):
+    """if request.user.is_authenticated:
+        max_questions_in_one_page = 2
+        first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
+        if filter_by=='all':
+            # Don't apply filter if filter_by is all
+            questions = Question.objects.order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        else:
+            my_question = []
+        # List of questions of the user logged in
+        for question in questions:
+            if question.asked_by.filter(id=request.user.id):
+                my_question.append(question.id)
+
+
+        max_pages = math.ceil((len(Question.objects.all()))/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
+
+        if (page_number < 1) or (page_number > max_pages) and (max_pages!=0):
+            raise Http404
+        return render(
+            request, 'home.html',
+            context={
+                'questions': questions,  # List of questions to be displayed on the current page
+                'login_or_logout': 'Logout',
+                'current_pages': range(page_number, page_number+4),
+                'max_pages': max_pages,
+                'my_questions': my_question,
+                'sort_by': sort_by,
+                'filter_by': filter_by})
+    else:
+        return redirect(my_login)"""
+    if request.user.is_authenticated:
+        max_questions_in_one_page = len(Question.objects.filter(asked_by__id=request.user.id))
+        first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
+        if filter_by=='all':
+            # Don't apply filter if filter_by is all
+            questions = Question.objects.filter(asked_by__id=request.user.id).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        else:
+            # Apply the filter
+            questions = Question.objects.filter(asked_by__id=request.user.id).filter(type=filter_by).order_by(sort_by)[first_question_on_the_page:first_question_on_the_page+max_questions_in_one_page]
+        liked_question = []
+        # Get the questions those are liked by the user on the current m
+        for question in questions:
+            if question.like_by.filter(id=request.user.id):
+                liked_question.append(question.id)
+
+        reported_question = []
+        # Get the questions those are reported by the user on the current page
+        for question in questions:
+            if question.reported_by.filter(id=request.user.id):
+                reported_question.append(question.id)
+
+        max_pages = math.ceil(len(questions)/max_questions_in_one_page) if filter_by=='all' else math.ceil((len(Question.objects.filter(type=filter_by)))/max_questions_in_one_page)
+
+        if (page_number < 1) or (page_number > max_pages) and (max_pages!=0):
+            raise Http404
+        return render(
+            request, 'home.html',
+            context={
+                'questions': questions,  # List of questions to be displayed on the current page
+                'login_or_logout': 'Logout',
+                'current_pages': range(page_number, page_number+4),
+                'max_pages': max_pages,
+                'liked_questions': liked_question,
+                'reported_questions': reported_question,
+                'sort_by': sort_by,
+                'filter_by': filter_by,
+                'is_my_question': True})
+    else:
+        return redirect(my_login)
+
+
+def delete_question(request, question_id=0):
+    question = Question.objects.get(id=question_id)
+    if question.asked_by_id == request.user.id:
+        question.delete()
+    return redirect(my_questions)
+
+
 def answer_question(request, its_question):
     if request.user.is_authenticated:
         # Create an object of AskQuestionForm with either the data from POST or empty
@@ -174,21 +232,6 @@ def answer_question(request, its_question):
             return render(request, 'answer_question.html', context={'form': form, 'login_or_logout': 'Logout', 'question': question})
     else:
         return redirect(my_login)
-
-
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_verified = True
-        user.save()
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
 
 
 # Like And Report APIs
