@@ -151,7 +151,7 @@ def answers(request, question_id, sort_by= '-when', page_number=1):
 		
 def my_questions(request, page_number=1, sort_by= '-when', filter_by='all'):
     if request.user.is_authenticated:
-        max_questions_in_one_page = len(Question.objects.filter(asked_by__id=request.user.id))
+        max_questions_in_one_page = len(Question.objects.filter(asked_by__id=request.user.id))+1
         first_question_on_the_page = (page_number*max_questions_in_one_page)-max_questions_in_one_page
         if filter_by=='all':
             # Don't apply filter if filter_by is all
