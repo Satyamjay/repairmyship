@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from authentication import views
+from verified_email_field import views as vefview
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', views.my_login),
     path('signup/', views.signup),
     path('login/', views.my_login),
@@ -37,10 +38,6 @@ urlpatterns = [
     path('api/like_answer/<int:answer_id>/', views.LikeAnswer.as_view()),
     path('api/report_answer/<int:answer_id>/', views.ReportAnswer.as_view()),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
-	# List My Questions
-    path('my_questions/', views.my_questions),
-    # Delete my question
-    path('delete_question/<int:question_id>', views.delete_question)
 
 
 ]
