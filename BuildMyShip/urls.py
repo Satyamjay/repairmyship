@@ -37,7 +37,14 @@ urlpatterns = [
     path('api/report_question/<int:question_id>/', views.ReportQuestion.as_view()),
     path('api/like_answer/<int:answer_id>/', views.LikeAnswer.as_view()),
     path('api/report_answer/<int:answer_id>/', views.ReportAnswer.as_view()),
+<<<<<<< HEAD
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
 
+=======
+    # List My Questions
+    path('my_questions/', views.my_questions),
+    # Delete my question
+    path('delete_question/<int:question_id>', views.delete_question)
+>>>>>>> 85e90b201536cfa583b3978ebfce45aea8f871c5
 
 ]
